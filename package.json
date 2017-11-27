@@ -15,7 +15,8 @@
     "sequelize": "^4.7.1",
     "sequelize-typescript": "^0.5.0",
     "sqlite3": "https://github.com/mapbox/node-sqlite3/tarball/master",
-    "tedious": "^2.0.0"
+    "tedious": "^2.0.0",
+    "typeorm": "^0.1.6"
   },
   "devDependencies": {
     "@types/body-parser": "^1.16.5",

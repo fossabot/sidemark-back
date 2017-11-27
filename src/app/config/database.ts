@@ -1,8 +1,8 @@
 /**
  * Module dependencies.
  */
-import { Sequelize } from 'sequelize-typescript'
 import * as dotenv from 'dotenv'
+import { ConnectionOptions } from 'typeorm'
 
 // Load environment variables
 dotenv.config()
@@ -18,13 +18,13 @@ const host = process.env.MSSQL_HOST as string
 const maxpool: number = Number(process.env.MSSQL_MAX_POOL)
 
 /**
- * Initialise SQLITE database connection.
+ * Parameter of SQLITE database connection.
  */
-export const connection = new Sequelize({
-  database: database,
-  dialect: 'sqlite',
-  username: username,
-  password: password,
-  storage:  storage,
-  logging: true
-})
+export const options: ConnectionOptions = {
+  type: 'sqlite',
+  database: './src/app/database.db',
+  entities: [
+    __dirname + '../models/*.ts'
+  ],
+  synchronize: true
+}

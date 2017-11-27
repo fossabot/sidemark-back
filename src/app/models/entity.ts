@@ -1,44 +1,32 @@
 // Module dependencies.
-import { connection } from '../config/database'
-import { Table, Column, Model, DataType, PrimaryKey, ForeignKey } from 'sequelize-typescript'
+import { Entity, PrimaryColumn, Column, OneToOne } from 'typeorm'
 
 // Entity Table Model.
-@Table(
-  {
-    tableName: 'Entity',
-    timestamps: false,
-    paranoid: false
-  }
-)
-export class Entity extends Model<Entity> {
-  @PrimaryKey
-  @Column({
-    type: DataType.INTEGER,
-    primaryKey: true,
-    autoIncrement: true
-  })
+@Entity('Entity')
+export class Likemark {
+  @PrimaryColumn('int')
   uuId: number
 
-  @ForeignKey(() => Entity)
+  @OneToOne(type => Likemark, {
+    cascadeRemove: true
+  })
   @Column({
-    type: DataType.INTEGER,
-    allowNull: false
+    type: 'int',
+    nullable: false
   })
   parentId: number
 
   @Column({
-    type: DataType.TEXT,
-    allowNull: true
+    type: 'varchar',
+    nullable: false
   })
   name: string
 
   @Column({
-    type: DataType.TEXT,
-    allowNull: true
+    type: 'varchar',
+    nullable: false
   })
   url: string
 }
 
-// Add model to Sequelize instance.
-connection.addModels([Entity])
-console.log('Entity model is ready!')
+console.log('Likemark model is ready!')
